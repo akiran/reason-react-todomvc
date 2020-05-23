@@ -1,26 +1,15 @@
 
-type todo = {
-  id: string,
-  title: string,
-  completed: bool
-}
-
-let todos = [|
-  {id: "1", title: "learn reason", completed: false},
-  {id: "2", title: "learn react", completed: true}
-|];
-
-
 [@react.component]
-let make = () => {
-  <div>
-    {React.string("hello")}
-    {
-      todos
-      ->Belt.Array.mapWithIndex((i, todo) => {
-        <div key={string_of_int(i)}>{React.string(todo.title)}</div>
-      })
-      ->React.array
-    }
-  </div>
+let make = (~todos: TodoData.todos) => {
+  <section className="main">
+    <ul className="todo-list">
+      {
+        todos
+        ->Belt.Array.map(todo => {
+          <TodoItem todo key={todo.id} />
+        })
+        ->React.array
+      }
+    </ul>
+  </section>
 }
