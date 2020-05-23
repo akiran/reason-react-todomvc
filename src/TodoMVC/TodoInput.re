@@ -1,11 +1,10 @@
 
 [@react.component]
-let make = () => {
+let make = (~addTodo) => {
   let (title, setTitle) = React.useState(() => "one");
   let handleKeyDown = (e) => {
-    if (ReactEvent.Keyboard.key(e) !== "Enter") {
-      Js.log(title)
-    } else {
+    if (ReactEvent.Keyboard.key(e) === "Enter") {
+      addTodo(title)
       setTitle((title) => "")
     }
   };
