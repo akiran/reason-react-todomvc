@@ -30,6 +30,9 @@ let reducer = (state:TodoData.state, action: TodoData.action) => {
 let make = () => {
   let (state, dispatch) = React.useReducer(reducer, initialState);
 
+  let activeTodos = Belt.Array.keep(state.todos, todo => todo.completed)
+  let activeTodoCount = Belt.Array.length(activeTodos)
+
   let currentTodos = filterTodos(state.todos, state.filter);
 
   let addTodo = title => dispatch(ADD_TODO(title));
@@ -41,6 +44,6 @@ let make = () => {
       <TodoInput addTodo={addTodo} />
     </header>
     <TodoList todos={currentTodos} deleteTodo={deleteTodo} />
-    <TodoFooter activeTodoCount={2} />
+    <TodoFooter activeTodoCount={activeTodoCount} />
   </section>
 }
