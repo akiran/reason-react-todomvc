@@ -15,9 +15,14 @@ let initialState: TodoData.state = {todos: initialTodos, filter: ALL};
 
 let reducer = (state:TodoData.state, action: TodoData.action) => {
   switch(action) {
-    | ADD_TODO(title) => {...state, todos: Belt.Array.concat(
-        state.todos, [|{id: "10", title, completed: false}|]
+    | ADD_TODO(title) => {
+        ...state,
+        todos: Belt.Array.concat(state.todos, [|{id: "10", title, completed:false}|]
       )}
+    | DELETE_TODO(id) => {
+        ...state,
+        todos: Belt.Array.keep(state.todos, todo => todo.id != id)
+      }
   }
 };
 
@@ -27,12 +32,15 @@ let make = () => {
 
   let currentTodos = filterTodos(state.todos, state.filter);
 
+  let addTodo = title => dispatch(ADD_TODO(title));
+  let deleteTodo = id => dispatch(DELETE_TODO(id));
+
   <section className="todoapp">
     <header className="header">
       <h1>{React.string("todos")}</h1>
-      <TodoInput addTodo={(title) => dispatch(ADD_TODO(title))} />
+      <TodoInput addTodo={addTodo} />
     </header>
-    <TodoList todos={currentTodos} />
+    <TodoList todos={currentTodos} deleteTodo={deleteTodo} />
     <TodoFooter activeTodoCount={2} />
   </section>
 }

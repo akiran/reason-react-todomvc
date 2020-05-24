@@ -1,5 +1,5 @@
 [@react.component]
-let make = (~todo: TodoData.todo) => {
+let make = (~todo: TodoData.todo, ~onDelete) => {
   let onToggle = (e) => ();
 
   <li>
@@ -11,6 +11,7 @@ let make = (~todo: TodoData.todo) => {
           onChange={onToggle}
         />
       <label>{todo.title -> React.string}</label>
+      <button className="destroy" onClick={onDelete} />
     </div>
   </li>
 }

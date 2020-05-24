@@ -10,6 +10,7 @@ type filter = ALL | ACTIVE | COMPLETED;
 
 type action =
   | ADD_TODO(string)
+  | DELETE_TODO(string)
 
 type state = {
   todos: todos,
