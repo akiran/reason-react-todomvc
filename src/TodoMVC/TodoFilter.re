@@ -12,7 +12,7 @@ let make = (~activeFilter, ~filter, ~selectFilter) => {
   <li>
     <a
       href="#/"
-      onClick={(e) => selectFilter(filter)}
+      onClick={(_) => selectFilter(filter)}
       className={activeFilter === filter ? "selected": ""}
     >
       {React.string(filterText(filter))}

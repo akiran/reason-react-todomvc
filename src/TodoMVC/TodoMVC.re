@@ -1,6 +1,6 @@
 let initialTodos: TodoData.todos = [|
-  {id: "1", title: "learn reason", completed: false},
-  {id: "2", title: "learn react", completed: true}
+  {id: Uuid.V4.uuidv4(), title: "learn reason", completed: false},
+  {id: Uuid.V4.uuidv4(), title: "learn react", completed: true}
 |];
 
 let filterTodos = (todos: TodoData.todos, nowShowing: TodoData.filter) => {
@@ -17,7 +17,7 @@ let reducer = (todos: TodoData.todos, action: TodoData.todoAction) => {
   let activeTodoCount = Belt.Array.length(activeTodos)
   let todoCount = Belt.Array.length(todos)
   switch(action) {
-    | ADD_TODO(title) => Belt.Array.concat(todos, [|{id: "10", title, completed:false}|])
+    | ADD_TODO(title) => Belt.Array.concat(todos, [|{id: Uuid.V4.uuidv4(), title, completed:false}|])
     | DELETE_TODO(id) => Belt.Array.keep(todos, todo => todo.id != id)
     | TOGGLE_TODO(id) => Belt.Array.map(
         todos,

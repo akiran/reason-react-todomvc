@@ -5,7 +5,7 @@ let make = (~addTodo) => {
   let handleKeyDown = (e) => {
     if (ReactEvent.Keyboard.key(e) === "Enter") {
       addTodo(title)
-      setTitle((title) => "")
+      setTitle((_) => "")
     }
   };
 

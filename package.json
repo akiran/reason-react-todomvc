@@ -18,6 +18,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "bs-guid": "^1.0.1",
     "re-classnames": "^4.1.0",
     "react": "^16.8.1",
     "react-dom": "^16.8.1",

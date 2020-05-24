@@ -16,8 +16,8 @@ let make = (~todos: TodoData.todos, ~deleteTodo, ~toggleTodo, ~toggleAll, ~activ
         ->Belt.Array.map(todo => {
           <TodoItem
             todo key={todo.id}
-            onDelete={(e) => deleteTodo(todo.id)}
-            onToggle={(e) => toggleTodo(todo.id)}
+            onDelete={(_) => deleteTodo(todo.id)}
+            onToggle={(_) => toggleTodo(todo.id)}
           />
         })
         ->React.array
