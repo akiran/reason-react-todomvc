@@ -45,9 +45,9 @@ let make = () => {
   let addTodo = title => dispatch(ADD_TODO(title));
   let deleteTodo = id => dispatch(DELETE_TODO(id));
   let toggleTodo = id => dispatch(TOGGLE_TODO(id));
-  let toggleAll = (e) => dispatch(TOGGLE_ALL);
-  let clearCompleted = (e) => dispatch(CLEAR_COMPLETED);
-  let selectFilter = (filter) => setFilter((f) => filter);
+  let toggleAll = (_) => dispatch(TOGGLE_ALL);
+  let clearCompleted = (_) => dispatch(CLEAR_COMPLETED);
+  let selectFilter = (filter) => setFilter((_) => filter);
 
   <section className="todoapp">
     <header className="header">
