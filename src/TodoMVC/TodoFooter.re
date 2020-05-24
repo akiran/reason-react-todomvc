@@ -11,7 +11,8 @@ let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~filter, ~select
         <li>
           <a
             href="#/"
-            onClick={(e) => selectFilter(ALL: TodoData.filter)}
+            onClick={(e) => selectFilter(TodoData.ALL)}
+            className={filter === TodoData.ALL ? "selected": ""}
           >
             {"All" -> React.string}
           </a>
@@ -19,7 +20,8 @@ let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~filter, ~select
         <li>
           <a
             href="#/"
-            onClick={(e) => selectFilter(ACTIVE: TodoData.filter)}
+            onClick={(e) => selectFilter(TodoData.ACTIVE)}
+            className={filter === TodoData.ACTIVE ? "selected": ""}
           >
             {"Active" -> React.string}
           </a>
@@ -27,9 +29,10 @@ let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~filter, ~select
         <li>
           <a
             href="#/"
-            onClick={(e) => selectFilter(COMPLETED: TodoData.filter)}
+            onClick={(e) => selectFilter(TodoData.COMPLETED)}
+            className={filter === TodoData.COMPLETED ? "selected": ""}
           >
-            {"COMPLETED" -> React.string}
+            {"Completed" -> React.string}
           </a>
         </li>
       </ul>
