@@ -1,5 +1,7 @@
+
+
 [@react.component]
-let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~filter, ~selectFilter) => {
+let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~activeFilter, ~selectFilter) => {
   let countText = " " ++ (activeTodoCount === 1 ? "item" : "items") ++ " left";
 
   <footer className="footer">
@@ -8,33 +10,21 @@ let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~filter, ~select
         {countText -> React.string}
       </span>
       <ul className="filters">
-        <li>
-          <a
-            href="#/"
-            onClick={(e) => selectFilter(TodoData.ALL)}
-            className={filter === TodoData.ALL ? "selected": ""}
-          >
-            {"All" -> React.string}
-          </a>
-        </li>
-        <li>
-          <a
-            href="#/"
-            onClick={(e) => selectFilter(TodoData.ACTIVE)}
-            className={filter === TodoData.ACTIVE ? "selected": ""}
-          >
-            {"Active" -> React.string}
-          </a>
-        </li>
-        <li>
-          <a
-            href="#/"
-            onClick={(e) => selectFilter(TodoData.COMPLETED)}
-            className={filter === TodoData.COMPLETED ? "selected": ""}
-          >
-            {"Completed" -> React.string}
-          </a>
-        </li>
+        <TodoFilter
+          activeFilter={activeFilter}
+          filter={TodoData.ALL}
+          selectFilter={selectFilter}
+        />
+        <TodoFilter
+          activeFilter={activeFilter}
+          filter={TodoData.ACTIVE}
+          selectFilter={selectFilter}
+        />
+        <TodoFilter
+          activeFilter={activeFilter}
+          filter={TodoData.COMPLETED}
+          selectFilter={selectFilter}
+        />
       </ul>
       {completedCount > 0 ? (
         <button className="clear-completed" onClick={clearCompleted}>
@@ -42,4 +32,9 @@ let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~filter, ~select
         </button>
       ): React.null}
   </footer>
-}
+};
+
+
+
+
+
