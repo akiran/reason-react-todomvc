@@ -11,6 +11,8 @@ type filter = ALL | ACTIVE | COMPLETED;
 type action =
   | ADD_TODO(string)
   | DELETE_TODO(string)
+  | TOGGLE_TODO(string)
+  | TOGGLE_ALL
 
 type state = {
   todos: todos,

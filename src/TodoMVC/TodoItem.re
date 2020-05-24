@@ -1,6 +1,5 @@
 [@react.component]
-let make = (~todo: TodoData.todo, ~onDelete) => {
-  let onToggle = (e) => ();
+let make = (~todo: TodoData.todo, ~onDelete, ~onToggle) => {
 
   <li>
     <div className="view">
