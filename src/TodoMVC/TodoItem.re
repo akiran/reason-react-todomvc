@@ -1,5 +1,7 @@
+open TodoData;
+
 [@react.component]
-let make = (~todo: TodoData.todo, ~onDelete, ~onToggle) => {
+let make = (~todo, ~onDelete, ~onToggle) => {
 
   <li className={todo.completed ? "completed" : ""}>
     <div className="view">

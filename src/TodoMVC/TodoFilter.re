@@ -1,5 +1,6 @@
+open TodoData;
 
-let filterText = (filter: TodoData.filter) => {
+let filterText = (filter) => {
   switch(filter) {
     | ALL => "All"
     | ACTIVE => "Active"

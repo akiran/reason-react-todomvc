@@ -1,4 +1,4 @@
-
+open TodoData;
 
 [@react.component]
 let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~activeFilter, ~selectFilter) => {
@@ -12,17 +12,17 @@ let make = (~activeTodoCount, ~completedCount, ~clearCompleted, ~activeFilter, ~
       <ul className="filters">
         <TodoFilter
           activeFilter={activeFilter}
-          filter={TodoData.ALL}
+          filter={ALL}
           selectFilter={selectFilter}
         />
         <TodoFilter
           activeFilter={activeFilter}
-          filter={TodoData.ACTIVE}
+          filter={ACTIVE}
           selectFilter={selectFilter}
         />
         <TodoFilter
           activeFilter={activeFilter}
-          filter={TodoData.COMPLETED}
+          filter={COMPLETED}
           selectFilter={selectFilter}
         />
       </ul>

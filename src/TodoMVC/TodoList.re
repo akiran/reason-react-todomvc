@@ -1,6 +1,7 @@
+open TodoData;
 
 [@react.component]
-let make = (~todos: TodoData.todos, ~deleteTodo, ~toggleTodo, ~toggleAll, ~activeTodoCount) => {
+let make = (~todos, ~deleteTodo, ~toggleTodo, ~toggleAll, ~activeTodoCount) => {
   <section className="main">
    <input
       id="toggle-all"

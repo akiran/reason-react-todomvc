@@ -1,10 +1,12 @@
-let initialTodos: TodoData.todos = [|
+open TodoData;
+
+let initialTodos = [|
   {id: Uuid.V4.uuidv4(), title: "learn reason", completed: false},
   {id: Uuid.V4.uuidv4(), title: "learn react", completed: true}
 |];
 
-let filterTodos = (todos: TodoData.todos, nowShowing: TodoData.filter) => {
-  switch(nowShowing) {
+let filterTodos = (todos, filter) => {
+  switch(filter) {
     | ALL => todos
     | ACTIVE => Belt.Array.keep(todos, todo => !todo.completed)
     | COMPLETED => Belt.Array.keep(todos, todo => todo.completed)
@@ -12,7 +14,7 @@ let filterTodos = (todos: TodoData.todos, nowShowing: TodoData.filter) => {
 };
 
 
-let reducer = (todos: TodoData.todos, action: TodoData.todoAction) => {
+let reducer = (todos, action) => {
   let activeTodos = Belt.Array.keep(todos, todo => todo.completed)
   let activeTodoCount = Belt.Array.length(activeTodos)
   let todoCount = Belt.Array.length(todos)
@@ -34,7 +36,7 @@ let reducer = (todos: TodoData.todos, action: TodoData.todoAction) => {
 [@react.component]
 let make = () => {
   let (todos, dispatch) = React.useReducer(reducer, initialTodos)
-  let (activeFilter, setFilter) = React.useState(():TodoData.filter => ACTIVE)
+  let (activeFilter, setFilter) = React.useState(() => ALL)
 
   let activeTodos = Belt.Array.keep(todos, todo => !todo.completed)
   let activeTodoCount = Belt.Array.length(activeTodos)
