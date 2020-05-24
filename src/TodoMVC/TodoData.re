@@ -8,15 +8,11 @@ type todos = array(todo)
 
 type filter = ALL | ACTIVE | COMPLETED;
 
-type action =
+type todoAction =
   | ADD_TODO(string)
   | DELETE_TODO(string)
   | TOGGLE_TODO(string)
   | TOGGLE_ALL
 
-type state = {
-  todos: todos,
-  filter: filter
-}
 
 

@@ -11,46 +11,34 @@ let filterTodos = (todos: TodoData.todos, nowShowing: TodoData.filter) => {
   }
 };
 
-let initialState: TodoData.state = {todos: initialTodos, filter: ALL};
 
-let reducer = (state:TodoData.state, action: TodoData.action) => {
-  let activeTodos = Belt.Array.keep(state.todos, todo => todo.completed)
+let reducer = (todos: TodoData.todos, action: TodoData.todoAction) => {
+  let activeTodos = Belt.Array.keep(todos, todo => todo.completed)
   let activeTodoCount = Belt.Array.length(activeTodos)
-  let todoCount = Belt.Array.length(state.todos)
+  let todoCount = Belt.Array.length(todos)
   switch(action) {
-    | ADD_TODO(title) => {
-        ...state,
-        todos: Belt.Array.concat(state.todos, [|{id: "10", title, completed:false}|]
-      )}
-    | DELETE_TODO(id) => {
-        ...state,
-        todos: Belt.Array.keep(state.todos, todo => todo.id != id)
-      }
-    | TOGGLE_TODO(id) => {
-      ...state,
-      todos: Belt.Array.map(
-        state.todos,
+    | ADD_TODO(title) => Belt.Array.concat(todos, [|{id: "10", title, completed:false}|])
+    | DELETE_TODO(id) => Belt.Array.keep(todos, todo => todo.id != id)
+    | TOGGLE_TODO(id) => Belt.Array.map(
+        todos,
         todo => todo.id == id ? {...todo, completed: !todo.completed}: todo
       )
-    }
-    | TOGGLE_ALL => {
-      ...state,
-      todos: Belt.Array.map(
-        state.todos,
+    | TOGGLE_ALL => Belt.Array.map(
+        todos,
         todo => {...todo, completed: !(activeTodoCount === todoCount)}
       )
-    }
   }
 };
 
 [@react.component]
 let make = () => {
-  let (state, dispatch) = React.useReducer(reducer, initialState);
+  let (todos, dispatch) = React.useReducer(reducer, initialTodos);
+  let (filter, setFilter) = React.useState(():TodoData.filter => ALL)
 
-  let activeTodos = Belt.Array.keep(state.todos, todo => todo.completed)
+  let activeTodos = Belt.Array.keep(todos, todo => todo.completed)
   let activeTodoCount = Belt.Array.length(activeTodos)
 
-  let currentTodos = filterTodos(state.todos, state.filter);
+  let currentTodos = filterTodos(todos, filter);
 
   let addTodo = title => dispatch(ADD_TODO(title));
   let deleteTodo = id => dispatch(DELETE_TODO(id));
