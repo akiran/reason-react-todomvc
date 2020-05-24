@@ -1,7 +1,7 @@
 [@react.component]
 let make = (~todo: TodoData.todo, ~onDelete, ~onToggle) => {
 
-  <li>
+  <li className={todo.completed ? "completed" : ""}>
     <div className="view">
       <input
           className="toggle"

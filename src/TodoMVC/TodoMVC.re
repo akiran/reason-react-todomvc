@@ -27,16 +27,18 @@ let reducer = (todos: TodoData.todos, action: TodoData.todoAction) => {
         todos,
         todo => {...todo, completed: !(activeTodoCount === todoCount)}
       )
+    | CLEAR_COMPLETED => Belt.Array.keep(todos, todo => !todo.completed)
   }
 };
 
 [@react.component]
 let make = () => {
-  let (todos, dispatch) = React.useReducer(reducer, initialTodos);
+  let (todos, dispatch) = React.useReducer(reducer, initialTodos)
   let (filter, setFilter) = React.useState(():TodoData.filter => ALL)
 
-  let activeTodos = Belt.Array.keep(todos, todo => todo.completed)
+  let activeTodos = Belt.Array.keep(todos, todo => !todo.completed)
   let activeTodoCount = Belt.Array.length(activeTodos)
+  let completedCount = Belt.Array.length(todos) - activeTodoCount
 
   let currentTodos = filterTodos(todos, filter);
 
@@ -44,6 +46,7 @@ let make = () => {
   let deleteTodo = id => dispatch(DELETE_TODO(id));
   let toggleTodo = id => dispatch(TOGGLE_TODO(id));
   let toggleAll = (e) => dispatch(TOGGLE_ALL);
+  let clearCompleted = (e) => dispatch(CLEAR_COMPLETED);
 
   <section className="todoapp">
     <header className="header">
@@ -57,6 +60,10 @@ let make = () => {
       toggleAll={toggleAll}
       activeTodoCount={activeTodoCount}
     />
-    <TodoFooter activeTodoCount={activeTodoCount} />
+    <TodoFooter
+      activeTodoCount={activeTodoCount}
+      completedCount={completedCount}
+      clearCompleted={clearCompleted}
+    />
   </section>
 }

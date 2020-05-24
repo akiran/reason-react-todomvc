@@ -13,6 +13,7 @@ type todoAction =
   | DELETE_TODO(string)
   | TOGGLE_TODO(string)
   | TOGGLE_ALL
+  | CLEAR_COMPLETED
 
 
 
