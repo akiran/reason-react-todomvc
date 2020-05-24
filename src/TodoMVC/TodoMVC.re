@@ -34,7 +34,7 @@ let reducer = (todos: TodoData.todos, action: TodoData.todoAction) => {
 [@react.component]
 let make = () => {
   let (todos, dispatch) = React.useReducer(reducer, initialTodos)
-  let (filter, setFilter) = React.useState(():TodoData.filter => ALL)
+  let (filter, setFilter) = React.useState(():TodoData.filter => ACTIVE)
 
   let activeTodos = Belt.Array.keep(todos, todo => !todo.completed)
   let activeTodoCount = Belt.Array.length(activeTodos)
@@ -47,6 +47,7 @@ let make = () => {
   let toggleTodo = id => dispatch(TOGGLE_TODO(id));
   let toggleAll = (e) => dispatch(TOGGLE_ALL);
   let clearCompleted = (e) => dispatch(CLEAR_COMPLETED);
+  let selectFilter = (filter) => setFilter((f) => filter);
 
   <section className="todoapp">
     <header className="header">
@@ -64,6 +65,8 @@ let make = () => {
       activeTodoCount={activeTodoCount}
       completedCount={completedCount}
       clearCompleted={clearCompleted}
+      selectFilter={selectFilter}
+      filter={filter}
     />
   </section>
 }
